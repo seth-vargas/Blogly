@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+User Detail Page
+{% endblock %}
+
+{% block content %}
+<img src="{{user.image_url}}">
+<h1>{{user.get_full_name()}}</h1>
+<form action="/users/{{user.id}}/edit">
+    <input type="submit" value="Edit">
+</form>
+<form action="/users/{{user.id}}/delete" method="POST">
+    <input type="submit" value="Delete">
+</form>
+{% endblock %}
