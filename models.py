@@ -1,5 +1,6 @@
 """Models for Blogly."""
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -34,3 +35,14 @@ class User(db.Model):
 
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
+
+# class TimestampModel(db.Model):
+#     __abstract__ = True
+#     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+# class Post(TimestampModel):
+#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+#     title = db.Column(db.Text, nullable=False)
+#     content = db.Column(db.Text, nullable=False)
+#     created_at = TimestampModel.created()
+#     user_id = db.Column(db.Text, db.ForeignKey('users.id'))
