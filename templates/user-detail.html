@@ -13,4 +13,10 @@ User Detail Page
 <form action="/users/{{user.id}}/delete" method="POST">
     <input type="submit" value="Delete">
 </form>
+<h2>Posts</h2>
+<ul>
+    {% for post in posts %}
+    <li>{{post.title}}</li>
+    {% endfor %}
+</ul>
 {% endblock %}
