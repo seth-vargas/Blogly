@@ -36,13 +36,26 @@ class User(db.Model):
     def get_full_name(self):
         return f"{self.first_name} {self.last_name}"
 
-# class TimestampModel(db.Model):
-#     __abstract__ = True
-#     created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-# class Post(TimestampModel):
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     title = db.Column(db.Text, nullable=False)
-#     content = db.Column(db.Text, nullable=False)
-#     created_at = TimestampModel.created()
-#     user_id = db.Column(db.Text, db.ForeignKey('users.id'))
+class Post(db.Model):
+
+    __tablename__ = "posts"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.Text, nullable=False, unique=True)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+
+    user = db.relationship("User", backref="posts")
+
+    def __repr__(self):
+        return f"<Post>\n    id={self.id}, title={self.title}, user={self.user.get_full_name()}, created_at={self.created_at}\n</Post>"
+
+    @classmethod 
+    def get_posts_by_user(cls, user_id):
+        return cls.query.filter(cls.user_id == user_id).all()
+
+    @classmethod
+    def get_all_posts(cls):
+        return cls.query.order_by(cls.created_at).all()

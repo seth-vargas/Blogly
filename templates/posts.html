@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %} All Posts {% endblock %} {% block
+content %}
+<h1>All Posts</h1>
+<ul>
+  {% for post in posts %}
+<p>
+    <h3>{{post.title}}</h3>
+    <p>{{post.content}}</p>
+    <p><i>{{post.user.get_full_name()}}</i></p>
+</p>
+  {% endfor %}
+</ul>
+{% endblock %}

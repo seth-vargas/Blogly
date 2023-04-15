@@ -1,6 +1,6 @@
 """ Seed file to make sample data for users db """
 
-from models import User, db
+from models import User, db, Post, datetime
 from app import app
 
 def seed():
@@ -19,8 +19,13 @@ def seed():
     u3 = User(first_name="Timmy",
             last_name="Smith")
 
+    p1 = Post(title="My First Post", content="oh, Hai", created_at=datetime.now(), user_id=1)
+
     # add and commit users to db
     db.session.add_all([u1, u2, u3])
+    db.session.commit()
+
+    db.session.add(p1)
     db.session.commit()
 
 # Runs ONLY if seed.py is called, NOT when imported from other files
