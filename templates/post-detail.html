@@ -1,11 +1,16 @@
-{% extends "base.html" %} {% block title %}Post Details{% endblock %} {% block
-content %}
+{% extends "base.html" %} 
+{% block title %}Post Details{% endblock %}
+{% block content %}
 <h1>{{post.title}}</h1>
 <p>{{post.content}}</p>
 <p><i>Created by {{post.user.get_full_name()}} at {{post.created_at}}</i></p>
+<h6>Tags:</h6>
+<p>
+  {% for tag in post.tags %}
+  <a href="/tags/{{tag.id}}" class="" role="button"><span class="label label-primary">{{tag.name}}</span></a>
+  {% endfor %}
+</p>
 <a class="btn btn-default" href="/users/{{user.id}}" role="button">Back</a>
 <a class="btn btn-info" href="/posts/{{post.id}}/edit" role="button">Edit</a>
-<a class="btn btn-danger" href="/posts/{{post.id}}/delete" role="button"
-  >Delete</a
->
+<a class="btn btn-danger" href="/posts/{{post.id}}/delete" role="button">Delete</a>
 {% endblock %}

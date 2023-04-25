@@ -49,11 +49,11 @@ class PostModelTestCase(TestCase):
 
     def test_get_all_posts(self):
         """ Tests that the get_all_posts is working """
-        posts = Post.get_all_posts()
+        posts = Post.get_all()
         self.assertEqual(len(posts), 1)
 
     def test_get_posts_by_user(self):
-        post = Post.get_posts_by_user(1)
+        post = Post.get_all_by_user(1)
         self.assertTrue(type(post) == list)
 
 
@@ -118,7 +118,7 @@ with app.test_client() as client:
                 "title": "This is a test post",
                 "content": "This is some test content"
             })
-            users_posts = Post.get_posts_by_user(user_id)
+            users_posts = Post.get_all_by_user(user_id)
             self.assertEqual(res.status_code, 302)
             self.assertEqual(len(users_posts), 2)
 

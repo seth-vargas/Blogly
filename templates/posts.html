@@ -1,12 +1,19 @@
-{% extends "base.html" %} {% block title %} All Posts {% endblock %} {% block
-content %}
+{% extends "base.html" %}
+{% block title %} All Posts {% endblock %}
+{% block content %}
 <h1>All Posts</h1>
 <ul>
   {% for post in posts %}
 <p>
-    <h3>{{post.title}}</h3>
+    <h3><a href="/posts/{{post.id}}">{{post.title}}</a></h3>
     <p>{{post.content}}</p>
-    <p><i>{{post.user.get_full_name()}}</i></p>
+    <p><i>Created by {{post.user.get_full_name()}} at {{post.created_at}}</i></p>
+    <h6>Tags:</h6>
+    <p>
+    {% for tag in post.tags %}
+    <a href="/tags/{{tag.id}}" role="button"><span class="label label-primary">{{tag.name}}</span></a>
+    {% endfor %}
+    </p>
 </p>
   {% endfor %}
 </ul>
