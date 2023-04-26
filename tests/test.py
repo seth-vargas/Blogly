@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from app import app
-from models import db, User, Post
+from models import db, User, Post, Tag, PostTag
 from seed import seed
 
 # Use test database and don't clutter tests with SQL
@@ -10,8 +10,9 @@ app.config['SQLALCHEMY_ECHO'] = False
 
 db.drop_all()
 db.create_all()
-
-
+##############################################################################################
+#                                Tests for User Model                                        #
+##############################################################################################
 class UserModelTestCase(TestCase):
     """ Tests for the User model """
 
@@ -35,6 +36,9 @@ class UserModelTestCase(TestCase):
         self.assertEqual(u1.get_full_name(), "John Doe")
         self.assertEqual(u2.get_full_name(), "Jane Doe")
 
+##############################################################################################
+#                                 Tests for Post Model                                       #
+##############################################################################################
 
 class PostModelTestCase(TestCase):
     """ Tests the Post Model """
